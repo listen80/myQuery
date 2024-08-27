@@ -1,3 +1,8 @@
+const { each } = require("./ext/array");
+
+function addEventListener(element, type, back) {
+  element.addEventListener(type, back);
+}
 function HTMLCollection(source) {
   for (var x = 0, len = source.length; x < len; x++) {
     this[x] = source[x];
@@ -19,13 +24,19 @@ HTMLCollection.prototype = {
     return map(this, fn);
   },
   hasClass: function (className) {
-    return className == null ? !!this[0].className : this[0] ? RegExp("\\b" + className + "\\b").test(this[0].className) : false;
+    return className == null
+      ? !!this[0].className
+      : this[0]
+      ? RegExp("\\b" + className + "\\b").test(this[0].className)
+      : false;
   },
   addClass: function (className) {
     var reg = RegExp("\\b" + className + "\\b");
     return this.each(function (element) {
       if (!reg.test(element.className)) {
-        element.className = trim((element.className + " " + className).replace(/\s+/, " "));
+        element.className = trim(
+          (element.className + " " + className).replace(/\s+/, " ")
+        );
       }
     });
   },
@@ -37,7 +48,9 @@ HTMLCollection.prototype = {
     } else {
       var reg = RegExp("\\b" + className + "\\b");
       return this.each(function (element) {
-        element.className = trim(element.className.replace(reg, "").trim().replace(/\s+/, " "));
+        element.className = trim(
+          element.className.replace(reg, "").trim().replace(/\s+/, " ")
+        );
       });
     }
   },
@@ -65,7 +78,9 @@ HTMLCollection.prototype = {
     });
   },
   prop: function (propName, propValue) {
-    return propValue == null ? this[0][propName] : (this[0][propName] = propValue);
+    return propValue == null
+      ? this[0][propName]
+      : (this[0][propName] = propValue);
   },
   val: function (value) {
     return value == null
@@ -127,7 +142,8 @@ HTMLCollection.prototype = {
           e = e || event;
           target = e.target || e.srcElement;
           while (target && element !== target) {
-            checkElementCssChain(target, css, element) && callback.call(element, e, target);
+            checkElementCssChain(target, css, element) &&
+              callback.call(element, e, target);
             target = target.parentNode;
           }
         }
@@ -144,7 +160,10 @@ HTMLCollection.prototype = {
   },
   after: function (text) {
     return this.each(function (element) {
-      element.parentNode.insertBefore(createTextNode(text), element.nextSibling);
+      element.parentNode.insertBefore(
+        createTextNode(text),
+        element.nextSibling
+      );
     });
   },
   append: function (text) {
@@ -169,7 +188,9 @@ HTMLCollection.prototype = {
   },
   cssText: function (cssText) {
     return this.each(function (element) {
-      cssText == null ? (element.style.cssText = "") : (element.style.cssText += ";" + cssText);
+      cssText == null
+        ? (element.style.cssText = "")
+        : (element.style.cssText += ";" + cssText);
     });
   },
   appendTo: function (cssSelector) {
@@ -230,3 +251,5 @@ HTMLCollection.prototype = {
     return new HTMLCollection(collect);
   },
 };
+
+module.exports = { HTMLCollection };

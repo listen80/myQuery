@@ -18,6 +18,5 @@ ajax.prototype.then = function(callback) {
     })
     return this;
 }
-$.ajax = function(argument) {
-    return new ajax(argument)
-};
+
+module.exports = ajax

@@ -25,9 +25,3 @@ pnpm-debug.log*
 
 *.zip
 *.exe
-bundle.js.map
-todo
-bundle.js
-
-Bundle
-.env
