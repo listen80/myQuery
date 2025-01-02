@@ -1,5 +1,5 @@
 const { HTMLCollection } = require("./base/htmlCollection");
-const { querySelectorAll } = require("./ext/query");
+const { querySelectorAll } = require("./dom/query");
 
 function $(selector) {
   if (selector == null) {
