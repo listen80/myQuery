@@ -1,8 +1,9 @@
-const { each } = require("./ext/array");
+const { each } = require("../utils/array");
 
 function addEventListener(element, type, back) {
   element.addEventListener(type, back);
 }
+
 function HTMLCollection(source) {
   for (var x = 0, len = source.length; x < len; x++) {
     this[x] = source[x];
@@ -11,17 +12,19 @@ function HTMLCollection(source) {
   return this;
 }
 
+const arrPrototype = Array.prototype;
+
 HTMLCollection.prototype = {
-  pop: [].pop,
-  push: [].push,
-  sort: [].sort,
-  splice: [].splice,
-  slice: [].slice,
+  pop: arrPrototype.pop,
+  push: arrPrototype.push,
+  sort: arrPrototype.sort,
+  splice: arrPrototype.splice,
+  slice: arrPrototype.slice,
   each: function (fn) {
-    return each(this, fn);
+    return arrPrototype.forEach(this, fn);
   },
   map: function (fn) {
-    return map(this, fn);
+    return arrPrototype.map(this, fn);
   },
   hasClass: function (className) {
     return className == null

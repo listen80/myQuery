@@ -1,4 +1,4 @@
-const { HTMLCollection } = require("./htmlCollection");
+const { HTMLCollection } = require("./base/htmlCollection");
 const { querySelectorAll } = require("./ext/query");
 
 function $(selector) {
