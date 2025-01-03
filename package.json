@@ -6,6 +6,7 @@
     "start": "rollup -c --environment NODE_ENV:development -w --sourcemap",
     "lint": "eslint --ext .js -f node_modules/eslint-friendly-formatter ."
   },
+  "main": "dist/myquery.js",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.15.8",
