@@ -10,3 +10,7 @@ function extend(src, obj, deep) {
   });
   return src;
 }
+
+module.exports = {
+  extend
+}

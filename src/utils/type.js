@@ -12,3 +12,9 @@ function isNull(obj) {
 function isUndef(obj) {
   return obj === undefined;
 }
+
+module.exports = {
+  type,
+  isNull,
+  isUndef,
+}
