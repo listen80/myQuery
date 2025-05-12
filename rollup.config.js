@@ -28,6 +28,7 @@ if (__DEV__) {
       open: true,
       port: process.env.PORT || "8101",
       contentBase: "./",
+      historyApiFallback: '/README.md',
     })
   );
 } else {
@@ -44,4 +45,5 @@ export default {
     name: "$",
     format: "umd",
   },
+
 };

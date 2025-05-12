@@ -1,6 +1,6 @@
 const { HTMLCollection } = require("./base/htmlCollection");
 const { querySelectorAll } = require("./dom/query");
-const { type } = require('./utils/object');
+const { type } = require('./utils/type');
 
 function $(selector) {
   if (selector == null) {
