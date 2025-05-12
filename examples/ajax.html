@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cn_zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ajax</title>
+  <script src="../dist/myQuery.js"></script>
+</head>
+
+<body>
+  <script>
+    $.ajax({
+      url: "../yarn.lock",
+      method: "POST",
+      data: {
+        title: "foo",
+        body: "bar",
+        userId: 1,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+
+  </script>
+
+</body>
+
+</html>

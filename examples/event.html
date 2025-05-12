@@ -4,22 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>demo</title>
+  <title>event</title>
   <script src="../dist/myQuery.js"></script>
 </head>
 
 <body>
   <script>
-    $(function () {
-      $("body").css({ backgroundColor: "red" });
-      $("p").css("color", "blue");
+    $(document).ready(() => {
+      console.log("ready");
     });
-
-    $('p').map((el) => {
-      console.log(el)
-      return
-    })
-    // var s = $.get({ a: 3, b: 444, c: { d: 33, e: [{ b: "&dds?=dd" }] } });
+    $('p').on("click", (e) => {
+      console.log(e);
+      console.log("click");
+    });
 
   </script>
   <p>hell world</p>
