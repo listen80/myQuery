@@ -1,18 +1,18 @@
-function event() {
+function EventBus() {
   this.lists = [];
 }
 
-event.prototype.fire = function (data) {
+EventBus.prototype.fire = function (data) {
   each(this.lists, function (callback) {
     callback(data);
   });
 };
 
-event.prototype.on = function (callback) {
+EventBus.prototype.on = function (callback) {
   this.lists.push(callback);
 };
 
-event.prototype.off = function (callback) {
+EventBus.prototype.off = function (callback) {
   callback
     ? each(this.lists, function (argument, index) {
       if (callback === argument) {
@@ -23,4 +23,4 @@ event.prototype.off = function (callback) {
     : (this.lists = []);
 };
 
-module.exports = event;
+module.exports = { EventBus };

@@ -1,14 +1,13 @@
-const { HTMLCollection } = require("./base/htmlCollection");
+const { HTMLCollection } = require("./base/Collection");
 const { querySelectorAll } = require("./dom/query");
-const { type } = require('./utils/type');
 
 function $(selector) {
   if (selector == null) {
     selector = [];
   } else if (selector[0] === "<") {
     selector = parseHTML(selector);
-  } else if (type(selector) === "Object") {
-    if (selector instanceof Element) {
+  } else if (typeof selector === "object") {
+    if (selector instanceof Node) {
       selector = [selector];
     } else if (selector instanceof HTMLCollection) {
       return selector

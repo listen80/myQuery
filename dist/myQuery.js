@@ -62,10 +62,43 @@
     some
   };
 
+  function addEventListener(element, type, back) {
+    element.addEventListener(type, back);
+  }
+  var bind = {
+    on: function (type, css, callback) {
+      var simple;
+      if (typeof css === "function") {
+        simple = true;
+        callback = css;
+      } else {
+        css = trim(css).split(/\s+/).reverse();
+        for (var i = 0, len = css.length; i < len; i++) {
+          css[i] = AnalysisCss(css[i]);
+        }
+      }
+      return this.each(function (element) {
+        addEventListener(element, type, function (e) {
+          if (simple) {
+            callback.call(element, e);
+          } else {
+            e = e || event;
+            target = e.target || e.srcElement;
+            while (target && element !== target) {
+              checkElementCssChain(target, css, element) && callback.call(element, e, target);
+              target = target.parentNode;
+            }
+          }
+        });
+      });
+    }
+  };
+
   const {
     each: each$1,
     map: map$1
   } = array;
+  const on = bind;
   function HTMLCollection$1(source) {
     for (var x = 0, len = source.length; x < len; x++) {
       this[x] = source[x];
@@ -173,16 +206,17 @@
         }
       });
       return new HTMLCollection$1(collect);
-    }
+    },
+    ...on
   };
-  var htmlCollection = {
+  var Collection = {
     HTMLCollection: HTMLCollection$1
   };
 
   const {
     each
   } = array;
-  function AnalysisCss(css) {
+  function AnalysisCss$1(css) {
     var cssObj = [];
     var matched = css.match(/^(\w+)?((?:\.\w+){0,})(\#\w+)?(\[\s*\w+\s*(?:=\s*\w+\s*)?\])?(:\w+)?$/);
     if (matched) {
@@ -226,7 +260,7 @@
     if (css[3] && !(element[css[3]] === true)) return;
     return true;
   }
-  function checkElementCssChain(element, css, last) {
+  function checkElementCssChain$1(element, css, last) {
     var i = 0,
       len = css.length;
     while (element && element !== last) {
@@ -263,13 +297,13 @@
       each(css.split(","), function (css) {
         css = trim(css).split(/\s+/).reverse();
         for (var i = 0, len = css.length; i < len; i++) {
-          css[i] = AnalysisCss(css[i]);
+          css[i] = AnalysisCss$1(css[i]);
         }
         each(parents, function (parent) {
           var all = parent.getElementsByTagName(css[0][0]);
           for (var x = 0, len = all.length; x < len; x++) {
             var now = all[x];
-            arrayIndex(elements, now) === -1 && checkElementCssChain(now, css, parent) && elements.push(now);
+            arrayIndex(elements, now) === -1 && checkElementCssChain$1(now, css, parent) && elements.push(now);
           }
         });
       });
@@ -280,37 +314,19 @@
     querySelectorAll: querySelectorAll$2
   };
 
-  function type$1(obj) {
-    return Object.prototype.toString.call(obj).replace(/^\[object |\]$/g, "").toLowerCase();
-  }
-  function isNull(obj) {
-    return obj === null;
-  }
-  function isUndef(obj) {
-    return obj === undefined;
-  }
-  var type_1 = {
-    type: type$1,
-    isNull,
-    isUndef
-  };
-
   const {
     HTMLCollection
-  } = htmlCollection;
+  } = Collection;
   const {
     querySelectorAll: querySelectorAll$1
   } = query;
-  const {
-    type
-  } = type_1;
   function $$1(selector) {
     if (selector == null) {
       selector = [];
     } else if (selector[0] === "<") {
       selector = parseHTML(selector);
-    } else if (type(selector) === "Object") {
-      if (selector instanceof Element) {
+    } else if (typeof selector === "object") {
+      if (selector instanceof Node) {
         selector = [selector];
       } else if (selector instanceof HTMLCollection) {
         return selector;

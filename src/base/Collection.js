@@ -1,8 +1,5 @@
 const { each, map } = require("../utils/array");
-
-function addEventListener(element, type, back) {
-  element.addEventListener(type, back);
-}
+const on = require("../bind/bind");
 
 function HTMLCollection(source) {
   for (var x = 0, len = source.length; x < len; x++) {
@@ -124,6 +121,8 @@ HTMLCollection.prototype = {
     });
     return new HTMLCollection(collect);
   },
+  ...on,
 };
+
 
 module.exports = { HTMLCollection };

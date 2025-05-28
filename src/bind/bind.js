@@ -1,3 +1,7 @@
+function addEventListener(element, type, back) {
+    element.addEventListener(type, back);
+}
+
 module.exports = {
     on: function (type, css, callback) {
         var simple;
