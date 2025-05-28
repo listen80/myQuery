@@ -26,7 +26,7 @@ if (__DEV__) {
   plugins.push(
     serve({
       // open: true,
-      port: process.env.PORT || 9002,
+      port: process.env.PORT || 9003,
       contentBase: "./",
       historyApiFallback: '/README.md',
     })
