@@ -22,6 +22,11 @@ module.exports = {
             element.parentNode.removeChild(element);
         });
     },
+    hide: function () {
+        return this.each(function (element) {
+            element.style.display = "none";
+        });
+    },
     css: function (cssName, cssValue) {
         var cssObj = {};
         if (cssName == null) {

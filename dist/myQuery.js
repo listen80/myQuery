@@ -4,7 +4,7 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.$ = factory());
 })(this, (function () { 'use strict';
 
-  function each$3(obj, fn) {
+  function each$4(obj, fn) {
     if (typeof obj.length === "number") {
       for (var i = 0, len = obj.length; i < len; i++) {
         if (fn.call(obj[i], obj[i], i, obj) === false) {
@@ -57,13 +57,16 @@
   var array$1 = {
     map: map$2,
     filter,
-    each: each$3,
+    each: each$4,
     every: every$1,
     some
   };
 
+  const {
+    each: each$3
+  } = array$1;
   function extend(src, obj, deep) {
-    each(obj, function (value, key) {
+    each$3(obj, function (value, key) {
       if (deep && typeof value === "object") {
         src[key] = src[key] || {};
         extend(src[key], value, deep);
@@ -384,6 +387,11 @@
         element.parentNode.removeChild(element);
       });
     },
+    hide: function () {
+      return this.each(function (element) {
+        element.style.display = "none";
+      });
+    },
     css: function (cssName, cssValue) {
       var cssObj = {};
       if (cssName == null) {
@@ -543,6 +551,7 @@
     }
   };
 
+  const createTextNode = document.createTextNode;
   var insert$1 = {
     before: function (text) {
       return this.each(function (element) {
@@ -550,6 +559,11 @@
       });
     },
     after: function (text) {
+      return this.each(function (element) {
+        element.parentNode.insertBefore(createTextNode(text), element.nextSibling);
+      });
+    },
+    insertAfter: function (text) {
       return this.each(function (element) {
         element.parentNode.insertBefore(createTextNode(text), element.nextSibling);
       });
@@ -581,7 +595,7 @@
     }
   };
 
-  var html$1 = {
+  var html$2 = {
     html: function (html) {
       return html == null ? this.map(function (element) {
         return element.innerHTML;
@@ -603,24 +617,24 @@
   const attr = attr$1;
   const klass = klass$1;
   const insert = insert$1;
-  const html = html$1;
-  function HTMLCollection$2(source) {
+  const html$1 = html$2;
+  function HTMLCollection$3(source) {
     for (var x = 0, len = source.length; x < len; x++) {
       this[x] = source[x];
     }
     this.length = len;
     return this;
   }
-  HTMLCollection$2.prototype = {
+  HTMLCollection$3.prototype = {
     ...base,
     ...on,
     ...attr,
     ...klass,
     ...insert,
-    ...html
+    ...html$1
   };
   var Collection = {
-    HTMLCollection: HTMLCollection$2
+    HTMLCollection: HTMLCollection$3
   };
 
   const {
@@ -724,12 +738,24 @@
     querySelectorAll: querySelectorAll$2
   };
 
+  function parseHTML$1(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.children;
+  }
+  var html = {
+    parseHTML: parseHTML$1
+  };
+
   const {
-    HTMLCollection: HTMLCollection$1
+    HTMLCollection: HTMLCollection$2
   } = Collection;
   const {
     querySelectorAll: querySelectorAll$1
   } = query;
+  const {
+    parseHTML
+  } = html;
   function myQuery$1(selector) {
     if (selector == null) {
       selector = [];
@@ -738,7 +764,7 @@
     } else if (typeof selector === "object") {
       if (selector instanceof Node) {
         selector = [selector];
-      } else if (selector instanceof HTMLCollection$1) {
+      } else if (selector instanceof HTMLCollection$2) {
         return selector;
       } else {
         throw "$: error selector" + selector;
@@ -748,7 +774,7 @@
     } else if (typeof selector === "function") {
       return document.readyState === "complete" ? selector($) : $(document).on("DOMContentLoaded", selector);
     }
-    return new HTMLCollection$1(selector);
+    return new HTMLCollection$2(selector);
   }
   var myQuery_1 = {
     myQuery: myQuery$1
@@ -763,14 +789,19 @@
   const {
     myQuery
   } = myQuery_1;
+  const {
+    HTMLCollection: HTMLCollection$1
+  } = Collection;
   Object.assign(myQuery, array, object, string, type, ajax, cookie, {
     version: "0.0.1",
     noConflict: function () {
       var old = window.$;
       window.$ = $;
       return old;
-    }
+    },
+    fn: HTMLCollection$1.prototype
   });
+  console.log(myQuery);
   var src = myQuery;
 
   return src;

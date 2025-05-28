@@ -6,6 +6,7 @@ const type = require("./utils/type");
 const ajax = require("./ext/func/ajax");
 const cookie = require("./ext/func/cookie");
 const { myQuery } = require("./myQuery");
+const { HTMLCollection } = require("./Collection");
 
 Object.assign(myQuery, array, object, string, type, ajax, cookie, {
   version: "0.0.1",
@@ -14,6 +15,8 @@ Object.assign(myQuery, array, object, string, type, ajax, cookie, {
     window.$ = $;
     return old;
   },
+  fn: HTMLCollection.prototype
 })
 
+console.log(myQuery)
 module.exports = myQuery;

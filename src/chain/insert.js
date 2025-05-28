@@ -1,3 +1,6 @@
+
+const createTextNode = document.createTextNode
+
 module.exports = {
     before: function (text) {
         if (typeof text === "object") {
@@ -8,6 +11,14 @@ module.exports = {
         });
     },
     after: function (text) {
+        return this.each(function (element) {
+            element.parentNode.insertBefore(
+                createTextNode(text),
+                element.nextSibling
+            );
+        });
+    },
+    insertAfter: function (text) {
         return this.each(function (element) {
             element.parentNode.insertBefore(
                 createTextNode(text),

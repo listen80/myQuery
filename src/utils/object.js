@@ -1,3 +1,4 @@
+const { each } = require("./array.js")
 
 function extend(src, obj, deep) {
   each(obj, function (value, key) {

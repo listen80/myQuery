@@ -1,5 +1,6 @@
 const { HTMLCollection } = require("./Collection");
 const { querySelectorAll } = require("./utils/query");
+const { parseHTML } = require("./utils/html");
 
 function myQuery(selector) {
     if (selector == null) {
