@@ -1,4 +1,4 @@
-const { each } = require("../utils/array");
+const { each } = require("./array");
 
 function AnalysisCss(css) {
   var cssObj = [];

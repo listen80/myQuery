@@ -1,27 +1,19 @@
-const { HTMLCollection } = require("./base/Collection");
-const { querySelectorAll } = require("./dom/query");
+const array = require("./utils/array");
+const object = require("./utils/object");
+const string = require("./utils/string");
+const type = require("./utils/type");
 
-function $(selector) {
-  if (selector == null) {
-    selector = [];
-  } else if (selector[0] === "<") {
-    selector = parseHTML(selector);
-  } else if (typeof selector === "object") {
-    if (selector instanceof Node) {
-      selector = [selector];
-    } else if (selector instanceof HTMLCollection) {
-      return selector
-    } else {
-      throw "$: error selector" + selector
-    }
-  } else if (typeof selector === "string") {
-    selector = querySelectorAll(selector) || [];
-  } else if (typeof selector === "function") {
-    return document.readyState === "complete"
-      ? selector($)
-      : $(document).on("DOMContentLoaded", selector);
-  }
-  return new HTMLCollection(selector);
-}
+const ajax = require("./ext/func/ajax");
+const cookie = require("./ext/func/cookie");
+const { myQuery } = require("./myQuery");
 
-module.exports = $;
+Object.assign(myQuery, array, object, string, type, ajax, cookie, {
+  version: "0.0.1",
+  noConflict: function () {
+    var old = window.$;
+    window.$ = $;
+    return old;
+  },
+})
+
+module.exports = myQuery;
