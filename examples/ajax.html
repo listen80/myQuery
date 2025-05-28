@@ -9,9 +9,15 @@
 </head>
 
 <body>
+  <div id="app"></div>
   <script>
+    /**
+     * @description: ajax
+     * @param {*} options
+     * @return {*}
+     */
     $.ajax({
-      url: "../yarn.lock",
+      url: "/package.json",
       method: "POST",
       data: {
         title: "foo",
@@ -19,7 +25,8 @@
         userId: 1,
       },
     }).then((res) => {
-      console.log(res);
+      const packageJson = JSON.parse(res)
+      $("#app").html(`<h1>${packageJson.name}</h1>`)
     });
 
   </script>

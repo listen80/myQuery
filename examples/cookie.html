@@ -4,23 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>event</title>
+  <title>ajax</title>
   <script src="../dist/myQuery.js"></script>
 </head>
 
 <body>
+  <div id="app"></div>
   <script>
-    $(() => {
-      console.log("ready");
-    })
-    $('p').on("click", (e) => {
-      console.log(e, "click");
-    });
+    document.cookie = "name=value; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"
+    $("#app").html(`<h1>${$.cookie('name')}</h1>`)
 
   </script>
-  <p>hell world</p>
-  <p>a string</p>
-  <p>a next string</p>
+
 </body>
 
 </html>

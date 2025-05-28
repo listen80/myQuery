@@ -9,18 +9,12 @@
 </head>
 
 <body>
+  <a href="">jump</a>
   <script>
-    $(() => {
-      console.log("ready");
-    })
-    $('p').on("click", (e) => {
-      console.log(e, "click");
-    });
-
+    $('body').attr('id', 'app')
+    $('a').attr('href', '/')
   </script>
-  <p>hell world</p>
-  <p>a string</p>
-  <p>a next string</p>
+
 </body>
 
 </html>

@@ -100,7 +100,7 @@
   };
 
   // 手写 Promise 实现
-  class MyPromise {
+  class Deferred$1 {
     constructor(executor) {
       // 初始化状态为 pending
       this.state = 'pending';
@@ -142,7 +142,7 @@
       onRejected = typeof onRejected === 'function' ? onRejected : err => {
         throw err;
       };
-      let newPromise = new MyPromise((resolve, reject) => {
+      let newPromise = new Deferred$1((resolve, reject) => {
         if (this.state === 'fulfilled') {
           setTimeout(() => {
             try {
@@ -225,10 +225,9 @@
     }
   }
 
-  // 导出 MyPromise
+  // 导出 Deferred
   var deferred = {
-    Deferred: MyPromise,
-    MyPromise
+    Deferred: Deferred$1
   };
 
   const {
@@ -588,6 +587,13 @@
         return element.innerHTML;
       }) + "" : this.each(function (element) {
         element.innerHTML = html;
+      });
+    },
+    text: function (text) {
+      return text == null ? this.map(function (element) {
+        return element.textContent;
+      }).join('') : this.each(function (element) {
+        element.textContent = text;
       });
     }
   };

@@ -1,5 +1,4 @@
 module.exports = {
-
     attr: function (attrName, attrValue) {
         return attrName == null
             ? this[0].attributes
