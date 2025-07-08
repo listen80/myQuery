@@ -18,5 +18,4 @@ Object.assign(myQuery, array, object, string, type, ajax, cookie, {
   fn: HTMLCollection.prototype
 })
 
-console.log(myQuery)
 module.exports = myQuery;

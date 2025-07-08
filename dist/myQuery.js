@@ -801,7 +801,6 @@
     },
     fn: HTMLCollection$1.prototype
   });
-  console.log(myQuery);
   var src = myQuery;
 
   return src;
