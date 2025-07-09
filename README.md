@@ -1,5 +1,10 @@
 # myQuery
 
+## 使用方法
+```js
+import $ from './myQuery.js'
+```
+
 ## 类似jQuery，Zepto
 
 ## 例子
@@ -9,9 +14,17 @@
 [ajax操作](!https://listen80.github.io/myQuery/examples/ajax.html)
 [cookie操作](!https://listen80.github.io/myQuery/examples/cookie.html)
 
-## dom 操作
+## dom 选取/操作
 ```js
-$('div').css({ backgroundColor: 'red' })
+$('div').append('<div>123</div>')
+```
+
+## attr 属性
+```js
+const id = $('div').attr('id')
+
+$('div').attr('id', 'newId')
+
 ```
 
 ## 事件 监听
@@ -22,4 +35,12 @@ $('div').on('click', (e) => { console.log(e) })
 ## ajax
 ```js
 $.ajax({ url: '' })
+```
+
+## cookie
+```js
+const name = $.cookie('name')
+console.log(name)
+
+$.cookie('name', 'listen80')
 ```
