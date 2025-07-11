@@ -5,14 +5,12 @@
 import $ from './myQuery.js'
 ```
 
-## 类似jQuery，Zepto
-
 ## 例子
-[dom操作](!https://listen80.github.io/myQuery/examples/dom.html)
-[属性操作](!https://listen80.github.io/myQuery/examples/attr.html)
-[事件监听](!https://listen80.github.io/myQuery/examples/event.html)
-[ajax操作](!https://listen80.github.io/myQuery/examples/ajax.html)
-[cookie操作](!https://listen80.github.io/myQuery/examples/cookie.html)
+* [dom操作](!https://listen80.github.io/myQuery/examples/dom.html)
+* [属性操作](!https://listen80.github.io/myQuery/examples/attr.html)
+* [事件监听](!https://listen80.github.io/myQuery/examples/event.html)
+* [ajax操作](!https://listen80.github.io/myQuery/examples/ajax.html)
+* [cookie操作](!https://listen80.github.io/myQuery/examples/cookie.html)
 
 ## dom 选取/操作
 ```js
